@@ -1,45 +1,32 @@
 import { Injectable } from '@angular/core';
-import { ArchivosJugadoresService}from './archivos-jugadores.service'
+import { ArchivosJugadoresService } from './archivos-jugadores.service'
 @Injectable()
 export class JugadoresService {
 
   //peticion:any;
-  constructor( public miHttp: ArchivosJugadoresService ) {
-   // this.peticion = this.miHttp.traerJugadores();
-//    this.peticion = this.miHttp.httpGetO("https://restcountries.eu/rest/v2/all");
+  constructor(public miHttp: ArchivosJugadoresService) {
+    // this.peticion = this.miHttp.traerJugadores();
+    //    this.peticion = this.miHttp.httpGetO("https://restcountries.eu/rest/v2/all");
   }
 
 
-filtrado:any;
+  jugadoresFiltrados: any;
 
-  traertodos(ruta : string,filtro: string) 
-  {
-    return this.miHttp.traerJugadores(ruta).then(data=>{
-      console.info("jugadores service",data);
+  traertodos(ruta: string, filtro: string) {
+    return this.miHttp.traerJugadores(ruta).then(jugadores => {
+      console.info('jugadores service', jugadores);
 
-      this.filtrado=data;
+      this.jugadoresFiltrados = jugadores;
+      let ganador: boolean;
+      ganador = filtro === 'ganadores';
 
-     let  ganador: boolean;
-      if(filtro=="ganadores")
-      {
-        ganador= true;
-      }
-      else
-      {
-        ganador= false;
-      }
-
-      this.filtrado =this.filtrado.filter(
-        data => data.gano === ganador  || filtro=="todos" ); return this.filtrado}
-      )
-      .catch(errror=>{console.log("error")
-      
-
-
-    return this.filtrado;
-      
-
-    });
+      this.jugadoresFiltrados = this.jugadoresFiltrados.filter(unJugador => unJugador.gano === ganador || filtro === 'todos');
+      return this.jugadoresFiltrados;
+    })
+      .catch(errror => {
+        console.log('error');
+        return this.jugadoresFiltrados;
+      });
   }
 
 }
