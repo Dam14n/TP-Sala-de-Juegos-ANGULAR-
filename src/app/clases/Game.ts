@@ -1,4 +1,4 @@
-export class Juego {
+export class Game {
 
   constructor(private _imagen: string, private _nombre: string, private _descripcion: string, private _routing: string) {
   }

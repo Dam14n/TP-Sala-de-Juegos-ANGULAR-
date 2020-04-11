@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Juego } from './../../clases/Juego';
+import { Game } from '../../clases/Game';
 import { JuegoService } from './../../servicios/juego-service.service';
 @Component({
   selector: 'app-menu-card',
@@ -8,9 +8,9 @@ import { JuegoService } from './../../servicios/juego-service.service';
 })
 export class MenuCardComponent implements OnInit {
 
-  private juegos: Array<Juego>;
+  private juegos: Array<Game>;
 
-  constructor(private juegoService: JuegoService) {
+  constructor(juegoService: JuegoService) {
     this.juegos = juegoService.obtenerJuegos();
   }
 

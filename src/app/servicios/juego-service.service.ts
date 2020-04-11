@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Juego } from './../clases/Juego';
+import { Game } from '../clases/Game';
 
 @Injectable({
   providedIn: 'root'
@@ -8,11 +8,11 @@ export class JuegoService {
 
   constructor() { }
 
-  public obtenerJuegos = (): Array<Juego> => {
-    const miArray: Array<Juego> = new Array<Juego>();
-    miArray.push(new Juego('./assets/imagenes/cerebro.jpg', 'Velocidad y agilidad aritmética', 'Juego de agilidad mental', 'Agilidad'));
-    miArray.push(new Juego('./assets/imagenes/ppt.jpg', 'Piedra Papel o Tijera', 'Juega contra la máquina', 'PPT'));
-    miArray.push(new Juego('./assets/imagenes/adivina.png', 'Adivina el número secreto', 'Juega de estrategia', 'Adivina'));
+  public obtenerJuegos = (): Array<Game> => {
+    const miArray: Array<Game> = new Array<Game>();
+    miArray.push(new Game('./assets/imagenes/cerebro.jpg', 'Velocidad y agilidad aritmética', 'Juego de agilidad mental', 'Agilidad'));
+    miArray.push(new Game('./assets/imagenes/ppt.jpg', 'Piedra Papel o Tijera', 'Juega contra la máquina', 'PPT'));
+    miArray.push(new Game('./assets/imagenes/adivina.png', 'Adivina el número secreto', 'Juega de estrategia', 'Adivina'));
     return miArray;
   }
 }

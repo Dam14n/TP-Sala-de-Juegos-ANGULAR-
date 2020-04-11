@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Juego } from './../../clases/Juego';
+import { Game } from '../../clases/Game';
 
 @Component({
   selector: 'app-card-juego',
@@ -8,7 +8,7 @@ import { Juego } from './../../clases/Juego';
   styleUrls: ['./card-juego.component.css']
 })
 export class CardJuegoComponent implements OnInit {
-  @Input() juego: Juego;
+  @Input() juego: Game;
 
   constructor(private route: ActivatedRoute, private router: Router) { }
 
