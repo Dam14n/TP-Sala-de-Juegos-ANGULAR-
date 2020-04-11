@@ -7,8 +7,7 @@ import { JuegoService } from './../../servicios/juego-service.service';
   styleUrls: ['./menu-card.component.css']
 })
 export class MenuCardComponent implements OnInit {
-
-  private juegos: Array<Game>;
+  juegos: Array<Game>;
 
   constructor(juegoService: JuegoService) {
     this.juegos = juegoService.obtenerJuegos();
