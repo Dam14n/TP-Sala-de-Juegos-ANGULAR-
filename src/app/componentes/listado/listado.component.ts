@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { PartidaService } from '../../servicios/partida-service.service';
 
 @Component({
@@ -8,26 +9,25 @@ import { PartidaService } from '../../servicios/partida-service.service';
 })
 export class ListadoComponent implements OnInit {
   public listadoParaCompartir: Array<any>;
-   miServicioJuego:PartidaService
+  miServicioJuego: PartidaService;
 
-  constructor(servicioJuego:PartidaService) {
+  constructor(private route: ActivatedRoute, private router: Router, servicioJuego: PartidaService) {
     this.miServicioJuego = servicioJuego;
-    
-  }
-  
-  ngOnInit() {
-    
   }
 
-  llamaService(){
-    console.log("llamaService");
-    this.listadoParaCompartir= this.miServicioJuego.listar();
+  ngOnInit() { }
+
+  llamaService() {
+    this.listadoParaCompartir = this.miServicioJuego.listar();
   }
 
-  llamaServicePromesa(){
-    console.log("llamaServicePromesa");
+  llamaServicePromesa() {
     this.miServicioJuego.listarPromesa().then((listado) => {
-        this.listadoParaCompartir = listado;
+      this.listadoParaCompartir = listado;
     });
+  }
+
+  navegarA(link: string) {
+    this.router.navigate([link]);
   }
 }
