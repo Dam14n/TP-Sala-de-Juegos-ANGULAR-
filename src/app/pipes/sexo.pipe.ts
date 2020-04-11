@@ -5,7 +5,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class SexoPipe implements PipeTransform {
 
-  transform(value: any, args?: any): String {
+  transform(value: any, args?: any): string {
     return value === 'M' ? 'machito' : 'señorita';
   }
 

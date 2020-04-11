@@ -2,7 +2,7 @@ import { TestBed, inject } from '@angular/core/testing';
 
 import { PartidaService } from './partida-service.service';
 
-describe('JuegoServiceService', () => {
+describe('PartidaService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [PartidaService]

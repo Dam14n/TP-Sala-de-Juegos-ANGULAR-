@@ -1,66 +1,18 @@
 import { Injectable } from '@angular/core';
-import { Juego } from '../clases/Juego';
-import { JuegoAdivina } from '../clases/juego-adivina';
-import { MiHttpService } from './mi-http/mi-http.service';
+import { Juego } from './../clases/Juego';
 
-@Injectable()
-export class JuegoServiceService {
+@Injectable({
+  providedIn: 'root'
+})
+export class JuegoService {
 
-  peticion: any;
-  constructor(public miHttp: MiHttpService) {
-    this.peticion = this.miHttp.httpGetO('http://localhost:3003');
-    //    this.peticion = this.miHttp.httpGetO("https://restcountries.eu/rest/v2/all");
-  }
+  constructor() { }
 
-  public listar(): Array<Juego> {
-    this.miHttp.httpGetP('https://restcountries.eu/rest/v2/all')
-      .then(data => {
-        console.log(data);
-      })
-      .catch(err => {
-        console.log(err);
-      });
-
-
-    this.peticion
-      .subscribe(data => {
-        console.log('En listar');
-        console.log(data);
-      }, err => {
-        console.info('error: ', err);
-      })
-
-    let miArray: Array<Juego> = new Array<Juego>();
-
-    miArray.push(new JuegoAdivina('Juego 1', false));
-    miArray.push(new JuegoAdivina('Pepe', true));
-    miArray.push(new JuegoAdivina('Juego 3', false));
-    miArray.push(new JuegoAdivina('Juego 4', false));
-    miArray.push(new JuegoAdivina('Juego 5', false));
-    miArray.push(new JuegoAdivina('Juego 6', false));
+  public obtenerJuegos = (): Array<Juego> => {
+    const miArray: Array<Juego> = new Array<Juego>();
+    miArray.push(new Juego('./assets/imagenes/cerebro.jpg', 'Velocidad y agilidad aritmética', 'Juego de agilidad mental', 'Agilidad'));
+    miArray.push(new Juego('./assets/imagenes/ppt.jpg', 'Piedra Papel o Tijera', 'Juega contra la máquina', 'PPT'));
+    miArray.push(new Juego('./assets/imagenes/adivina.png', 'Adivina el número secreto', 'Juega de estrategia', 'Adivina'));
     return miArray;
   }
-
-  public listarPromesa(): Promise<Array<Juego>> {
-    this.peticion
-      .subscribe(data => {
-        console.log('En listarPromesa');
-        console.log(data);
-      }, err => {
-        console.log(err);
-      })
-    let promesa: Promise<Array<Juego>> = new Promise((resolve, reject) => {
-      let miArray: Array<Juego> = new Array<Juego>();
-      miArray.push(new JuegoAdivina('JuegoPromesa 1', false, 'promesa'));
-      miArray.push(new JuegoAdivina('PepePromesa', true));
-      miArray.push(new JuegoAdivina('JuegoPromesa 3', false));
-      miArray.push(new JuegoAdivina('JuegoPromesa 4', false));
-      miArray.push(new JuegoAdivina('JuegoPromesa 5', false));
-      miArray.push(new JuegoAdivina('JuegoPromesa 6', false));
-      resolve(miArray);
-    });
-
-    return promesa;
-  }
-
 }

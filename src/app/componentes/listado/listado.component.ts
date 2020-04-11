@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { JuegoServiceService } from '../../servicios/juego-service.service';
+import { PartidaService } from '../../servicios/partida-service.service';
 
 @Component({
   selector: 'app-listado',
@@ -8,9 +8,9 @@ import { JuegoServiceService } from '../../servicios/juego-service.service';
 })
 export class ListadoComponent implements OnInit {
   public listadoParaCompartir: Array<any>;
-   miServicioJuego:JuegoServiceService
+   miServicioJuego:PartidaService
 
-  constructor(servicioJuego:JuegoServiceService) {
+  constructor(servicioJuego:PartidaService) {
     this.miServicioJuego = servicioJuego;
     
   }

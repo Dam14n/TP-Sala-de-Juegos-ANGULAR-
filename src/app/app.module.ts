@@ -28,10 +28,11 @@ import { RegistroComponent } from './componentes/registro/registro.component';
 import { SexoPipe } from './pipes/sexo.pipe';
 import { RuteandoModule } from './ruteando/ruteando.module';
 import { ArchivosJugadoresService } from './servicios/archivos-jugadores.service';
-import { JuegoServiceService } from './servicios/juego-service.service';
+import { PartidaService } from './servicios/partida-service.service';
 import { JugadoresService } from './servicios/jugadores.service';
 import { MiHttpService } from './servicios/mi-http/mi-http.service';
 import { PaisesService } from './servicios/paises.service';
+import { CardJuegoComponent } from './componentes/card-juego/card-juego.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,8 @@ import { PaisesService } from './servicios/paises.service';
     MapaDeGoogleComponent,
     JugadoresListadoComponent,
     InputJugadoresComponent,
-    SexoPipe
+    SexoPipe,
+    CardJuegoComponent
   ],
   imports: [
     BrowserModule,
@@ -68,7 +70,7 @@ import { PaisesService } from './servicios/paises.service';
       apiKey: 'AIzaSyB6f8x4IjRlesQ3oETc6BXYQHVRTOlY3Ys'
     })
   ],
-  providers: [JuegoServiceService, MiHttpService, PaisesService, ArchivosJugadoresService, JugadoresService],
+  providers: [PartidaService, MiHttpService, PaisesService, ArchivosJugadoresService, JugadoresService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
