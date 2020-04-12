@@ -1,51 +1,58 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute, ParamMap } from '@angular/router';
-
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { TimerObservable } from 'rxjs/observable/TimerObservable';
+import { NgForm } from '@angular/forms';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-
-  private subscription: Subscription;
-  usuario = '';
-  clave = '';
+  subscription: Subscription;
   progreso: number;
   progresoMensaje = 'esperando...';
-  logeando = true;
-  ProgresoDeAncho: string;
+  logeando = false;
+  progresoDeAncho: string;
+  intentoHacerLogin = false;
 
   clase = 'progress-bar progress-bar-info progress-bar-striped ';
-
+  loginForm = new FormGroup({
+    usuario: new FormControl('', Validators.required),
+    clave: new FormControl('', Validators.required)
+  });
   constructor(
     private route: ActivatedRoute,
     private router: Router) {
     this.progreso = 0;
-    this.ProgresoDeAncho = '0%';
-
+    this.progresoDeAncho = '0%';
   }
 
-  ngOnInit() {
+  ngOnInit() { }
+
+  get form() {
+    return this.loginForm.controls;
   }
 
-  Entrar() {
-    if (this.usuario === 'admin' && this.clave === 'admin') {
-      this.router.navigate(['/Principal']);
+  entrar() {
+    this.intentoHacerLogin = true;
+    const usuario = this.loginForm.value.usuario;
+    const clave = this.loginForm.value.clave;
+    if (usuario === 'admin' && clave === 'admin') {
+      this.moverBarraDeProgreso();
     }
   }
 
-  MoverBarraDeProgreso() {
+  moverBarraDeProgreso() {
     const timer = TimerObservable.create(200, 50);
-    this.logeando = false;
+    this.logeando = true;
     this.clase = 'progress-bar progress-bar-danger progress-bar-striped active';
     this.progresoMensaje = 'NSA spy...';
     this.subscription = timer.subscribe(t => {
-      console.log('inicio');
       this.progreso = this.progreso + 1;
-      this.ProgresoDeAncho = this.progreso + 20 + '%';
+      this.progresoDeAncho = this.progreso + 20 + '%';
       switch (this.progreso) {
         case 15:
           this.clase = 'progress-bar progress-bar-warning progress-bar-striped active';
@@ -67,15 +74,13 @@ export class LoginComponent implements OnInit {
           this.clase = 'progress-bar progress-bar-success progress-bar-striped active';
           this.progresoMensaje = 'Instalando KeyLogger..';
           break;
-
         case 100:
-          console.log('final');
           this.subscription.unsubscribe();
-          this.Entrar();
+          this.logeando = true;
+          this.router.navigate(['/Principal']);
           return;
       }
     });
-    this.logeando = true;
   }
 
 }
