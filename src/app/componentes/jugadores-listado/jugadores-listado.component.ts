@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { JugadoresService } from '../../servicios/jugadores.service';
 @Component({
   selector: 'app-jugadores-listado',
@@ -10,7 +11,7 @@ export class JugadoresListadoComponent implements OnInit {
   listado: any;
   miJugadoresServicio: JugadoresService;
 
-  constructor(serviceJugadores: JugadoresService) {
+  constructor(serviceJugadores: JugadoresService, private router: Router) {
     this.miJugadoresServicio = serviceJugadores;
   }
 
@@ -31,6 +32,10 @@ export class JugadoresListadoComponent implements OnInit {
       this.listado = data;
 
     });
+  }
+
+  navegarA(link: string) {
+    this.router.navigate([link]);
   }
 
 }
