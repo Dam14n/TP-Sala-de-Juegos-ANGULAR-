@@ -1,3 +1,4 @@
+import { AuthService } from './../../servicios/auth-service.service';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -24,13 +25,17 @@ export class LoginComponent implements OnInit {
     clave: new FormControl('', Validators.required)
   });
   constructor(
-    private route: ActivatedRoute,
+    private authService: AuthService,
     private router: Router) {
     this.progreso = 0;
     this.progresoDeAncho = '0%';
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+    if (this.authService.isAuthenticated()) {
+      this.router.navigate(['/Principal']);
+    }
+  }
 
   get form() {
     return this.loginForm.controls;
@@ -40,12 +45,10 @@ export class LoginComponent implements OnInit {
     this.intentoHacerLogin = true;
     const usuario = this.loginForm.value.usuario;
     const clave = this.loginForm.value.clave;
-    if (usuario === 'admin' && clave === 'admin') {
-      this.moverBarraDeProgreso();
-    }
+    this.authService.login(usuario, clave, this.moverBarraDeProgreso);
   }
 
-  moverBarraDeProgreso() {
+  public moverBarraDeProgreso = () => {
     const timer = TimerObservable.create(200, 50);
     this.logeando = true;
     this.clase = 'progress-bar progress-bar-danger progress-bar-striped active';

@@ -1,3 +1,4 @@
+import { AuthGuardService } from './../servicios/auth-guard-service.service';
 import { NgModule } from '@angular/core';
 // importo del module principal
 import { RouterModule } from '@angular/router';
@@ -18,15 +19,15 @@ import { QuienSoyComponent } from '../componentes/quien-soy/quien-soy.component'
 import { RegistroComponent } from '../componentes/registro/registro.component';
 
 const MiRuteo = [
-  { path: 'Jugadores', component: JugadoresListadoComponent },
+  { path: 'Jugadores', component: JugadoresListadoComponent, canActivate: [AuthGuardService] },
   { path: '', component: LoginComponent, pathMatch: 'full' },
   { path: 'Login', component: LoginComponent },
-  { path: 'Mapa', component: MapaDeGoogleComponent },
-  { path: 'QuienSoy', component: QuienSoyComponent },
+  { path: 'Mapa', component: MapaDeGoogleComponent, canActivate: [AuthGuardService] },
+  { path: 'QuienSoy', component: QuienSoyComponent, canActivate: [AuthGuardService] },
   { path: 'Registro', component: RegistroComponent },
-  { path: 'Principal', component: PrincipalComponent, pathMatch: 'full' },
-  { path: 'Listado', component: ListadoComponent },
-  { path: 'Paises', component: ListadoDePaisesComponent },
+  { path: 'Principal', component: PrincipalComponent, pathMatch: 'full', canActivate: [AuthGuardService] },
+  { path: 'Listado', component: ListadoComponent, canActivate: [AuthGuardService] },
+  { path: 'Paises', component: ListadoDePaisesComponent, canActivate: [AuthGuardService] },
   {
     path: 'Juegos',
     component: JuegosComponent,
@@ -35,7 +36,8 @@ const MiRuteo = [
       { path: 'Adivina', component: AdivinaElNumeroComponent },
       { path: 'AdivinaMasListado', component: AdivinaMasListadoComponent },
       { path: 'AgilidadaMasListado', component: AgilidadMasListadoComponent },
-      { path: 'Agilidad', component: AgilidadAritmeticaComponent }]
+      { path: 'Agilidad', component: AgilidadAritmeticaComponent }],
+    canActivate: [AuthGuardService]
   },
   { path: '**', component: ErrorComponent },
   { path: 'error', component: ErrorComponent }];
