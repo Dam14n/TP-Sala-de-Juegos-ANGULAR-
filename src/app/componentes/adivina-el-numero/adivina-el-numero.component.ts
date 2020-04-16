@@ -1,6 +1,6 @@
 
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { PartidaAdivina } from '../../clases/Partida-adivina'
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { PartidaAdivina } from '../../clases/Partida-adivina';
 
 @Component({
   selector: 'app-adivina-el-numero',
@@ -10,29 +10,30 @@ import { PartidaAdivina } from '../../clases/Partida-adivina'
 export class AdivinaElNumeroComponent implements OnInit {
   @Output() enviarJuego: EventEmitter<any> = new EventEmitter<any>();
 
-  nuevoJuego: PartidaAdivina;
+  partida: PartidaAdivina;
   Mensajes: string;
   contador: number;
   ocultarVerificar: boolean;
 
   constructor() {
-    this.nuevoJuego = new PartidaAdivina();
-    console.info('numero Secreto:', this.nuevoJuego.numeroSecreto);
+    this.partida = new PartidaAdivina();
+    console.info('numero Secreto:', this.partida.numeroSecreto);
     this.ocultarVerificar = false;
   }
   generarnumero() {
-    this.nuevoJuego.generarnumero();
+    this.partida = new PartidaAdivina();
+    this.partida.generarnumero();
     this.contador = 0;
   }
 
   verificar() {
     this.contador++;
     this.ocultarVerificar = true;
-    console.info('numero Secreto:', this.nuevoJuego.gano);
-    if (this.nuevoJuego.verificar()) {
-      this.enviarJuego.emit(this.nuevoJuego);
-      this.MostarMensaje('Sos un Genio!!!', true);
-      this.nuevoJuego.numeroSecreto = 0;
+    console.info('numero Secreto:', this.partida.gano);
+    if (this.partida.verificar()) {
+      this.enviarJuego.emit(this.partida);
+      this.mostarMensaje('Sos un Genio!!!', true);
+      this.partida.numeroSecreto = 0;
     } else {
       let mensaje: string;
       switch (this.contador) {
@@ -46,7 +47,7 @@ export class AdivinaElNumeroComponent implements OnInit {
           mensaje = 'No es, Yo crei que la tercera era la vencida.';
           break;
         case 4:
-          mensaje = 'No era el  ' + this.nuevoJuego.numeroIngresado;
+          mensaje = 'No era el  ' + this.partida.numeroIngresado;
           break;
         case 5:
           mensaje = ' intentos y nada.';
@@ -58,19 +59,15 @@ export class AdivinaElNumeroComponent implements OnInit {
           mensaje = 'Ya le erraste ' + this.contador + ' veces';
           break;
       }
-      this.MostarMensaje('#' + this.contador + ' ' + mensaje + ' ayuda :' + this.nuevoJuego.retornarAyuda());
+      this.mostarMensaje('#' + this.contador + ' ' + mensaje + ' ayuda :' + this.partida.retornarAyuda());
     }
-    console.info('numero Secreto:', this.nuevoJuego.gano);
+    console.info('numero Secreto:', this.partida.gano);
   }
 
-  MostarMensaje(mensaje: string = 'este es el mensaje', ganador: boolean = false) {
+  mostarMensaje(mensaje: string = 'este es el mensaje', ganador: boolean = false) {
     this.Mensajes = mensaje;
     const x = document.getElementById('snackbar');
-    if (ganador) {
-      x.className = 'show Ganador';
-    } else {
-      x.className = 'show Perdedor';
-    }
+    x.className = ganador ? 'show Ganador' : 'show Perdedor';
     const modelo = this;
     setTimeout(function () {
       x.className = x.className.replace('show', '');

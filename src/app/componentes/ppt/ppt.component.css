@@ -1,0 +1,14 @@
+.manos-container {
+  display: flex;
+  justify-content: center;
+}
+
+.card {
+  cursor: pointer;
+}
+
+.informacion-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

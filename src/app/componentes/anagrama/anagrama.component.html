@@ -1,3 +1,30 @@
-<p>
-  anagrama works!
-</p>
+<form name="anagrama">
+  <ul>
+    <li>
+      Palabra desordenada: <input value="{{partida.palabraDesordenada}}" placeholder="Palabra desordenada" name="palabraDesordenada"
+        type="text" class="form-control" style="width:50%" readonly />
+    </li>
+    <li>
+      Respuesta: <input [(ngModel)]="partida.palabraIngresada" placeholder="ingrese palabra" name="palabraIngresada"
+        type="text" class="form-control" style="width:50%" />
+    </li>
+    <li>
+      <h2 [hidden]="ocultarVerificar">
+        <button (click)="verificar()" class="btn btn-success btn-lg">Verificar {{tiempo}}
+        </button>
+      </h2>
+    </li>
+    <li>
+      <h2 [hidden]="!ocultarVerificar">
+        <button (click)="iniciarPartida()" class="btn btn-info btn-lg">Nuevo</button>
+      </h2>
+    </li>
+    <li>
+      <h2 [hidden]="ocultarVerificar">
+        <p><i class="fa fa-spinner fa-spin"></i>Esperando palabra...</p>
+      </h2>
+      <h3 [hidden]="!partida.gano">usted adivino la palabra</h3>
+      <h3 [hidden]="partida.gano">usted aún no gano </h3>
+    </li>
+  </ul>
+</form>

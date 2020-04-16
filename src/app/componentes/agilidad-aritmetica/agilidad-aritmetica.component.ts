@@ -1,5 +1,4 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { Subscription } from 'rxjs';
 import { PartidaAgilidad } from '../../clases/Partida-agilidad';
 
 @Component({
@@ -9,40 +8,48 @@ import { PartidaAgilidad } from '../../clases/Partida-agilidad';
 })
 export class AgilidadAritmeticaComponent implements OnInit {
   @Output() enviarJuego: EventEmitter<any> = new EventEmitter<any>();
-  nuevoJuego: PartidaAgilidad;
+  partida: PartidaAgilidad;
   ocultarVerificar: boolean;
-  Tiempo: number;
+  tiempo: number;
   repetidor: any;
-  private subscription: Subscription;
-  private readonly DEFAULT_TIME = 5;
+  private readonly DEFAULT_TIME = 10;
 
   ngOnInit() {
+    this.partida.iniciarPartida();
   }
 
   constructor() {
     this.ocultarVerificar = true;
-    this.Tiempo = this.DEFAULT_TIME;
-    this.nuevoJuego = new PartidaAgilidad();
+    this.tiempo = this.DEFAULT_TIME;
+    this.partida = new PartidaAgilidad();
     console.info('Inicio agilidad');
   }
 
-  NuevoJuego() {
+  iniciarPartida() {
+    this.partida = new PartidaAgilidad();
+    this.partida.iniciarPartida();
+    console.log('Respuesta cuenta: ' + this.partida.operador.calcular(this.partida.primerNumero, this.partida.segundoNumero));
     this.ocultarVerificar = false;
     this.repetidor = setInterval(() => {
-      this.Tiempo--;
-      console.log('llego', this.Tiempo);
-      if (this.Tiempo === 0) {
-        clearInterval(this.repetidor);
-        this.verificar();
-        this.ocultarVerificar = true;
-        this.Tiempo = this.DEFAULT_TIME;
+      this.tiempo--;
+      console.log('llego', this.tiempo);
+      if (this.tiempo === 0) {
+        this.finalizarPartida();
       }
     }, 900);
 
   }
   verificar() {
-    this.ocultarVerificar = false;
-    clearInterval(this.repetidor);
+    if (this.partida.verificar()) {
+      this.finalizarPartida();
+    }
   }
 
+  private finalizarPartida() {
+    clearInterval(this.repetidor);
+    this.ocultarVerificar = true;
+    this.tiempo = this.DEFAULT_TIME;
+    this.enviarJuego.emit(this.partida);
+    this.partida.numeroIngresado = 0;
+  }
 }

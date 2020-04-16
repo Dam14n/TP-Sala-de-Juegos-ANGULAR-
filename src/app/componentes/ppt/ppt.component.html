@@ -1,0 +1,15 @@
+<div class="manos-container">
+  <div class="card" style="width: 18rem;" *ngFor="let mano of manos">
+    <img class="card-img-top" src="{{mano.imagen}}" alt="Card image cap" (click)="verificar(mano)">
+  </div>
+</div>
+<div class="informacion-container">
+  <h2 [hidden]="ocultarVerificar">
+    <p><i class="fa fa-spinner fa-spin"></i>Esperando que seleccione una opcion...</p>
+  </h2>
+  <h3 [hidden]="!partida.gano">usted GANOOO!!</h3>
+  <h3 [hidden]="partida.gano">usted aún no gano </h3>
+  <h2 [hidden]="!partida.gano">
+    <button (click)="iniciarPartida()" class="btn btn-info btn-lg">Nuevo</button>
+  </h2>
+</div>

@@ -1,4 +1,3 @@
-import { AuthGuardService } from './../servicios/auth-guard-service.service';
 import { NgModule } from '@angular/core';
 // importo del module principal
 import { RouterModule } from '@angular/router';
@@ -17,6 +16,10 @@ import { MenuCardComponent } from '../componentes/menu-card/menu-card.component'
 import { PrincipalComponent } from '../componentes/principal/principal.component';
 import { QuienSoyComponent } from '../componentes/quien-soy/quien-soy.component';
 import { RegistroComponent } from '../componentes/registro/registro.component';
+import { AnagramaComponent } from './../componentes/anagrama/anagrama.component';
+import { MemotestComponent } from './../componentes/memotest/memotest.component';
+import { PptComponent } from './../componentes/ppt/ppt.component';
+import { AuthGuardService } from './../servicios/auth-guard-service.service';
 
 const MiRuteo = [
   { path: 'Jugadores', component: JugadoresListadoComponent, canActivate: [AuthGuardService] },
@@ -36,7 +39,10 @@ const MiRuteo = [
       { path: 'Adivina', component: AdivinaElNumeroComponent },
       { path: 'AdivinaMasListado', component: AdivinaMasListadoComponent },
       { path: 'AgilidadaMasListado', component: AgilidadMasListadoComponent },
-      { path: 'Agilidad', component: AgilidadAritmeticaComponent }],
+      { path: 'Agilidad', component: AgilidadAritmeticaComponent },
+      { path: 'PPT', component: PptComponent },
+      { path: 'Anagrama', component: AnagramaComponent },
+      { path: 'Memotest', component: MemotestComponent }],
     canActivate: [AuthGuardService]
   },
   { path: '**', component: ErrorComponent },

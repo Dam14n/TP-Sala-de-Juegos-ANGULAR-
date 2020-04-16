@@ -3,10 +3,10 @@ export abstract class Partida {
   public jugador: string;
   public gano = false;
 
-  constructor(nombre?: string, gano?: boolean, jugador?: string) {
-    this.nombre = nombre ? nombre : 'Sin Nombre';
-    this.gano = gano === true;
-    this.jugador = jugador ? jugador : 'natalia natalia';
+  constructor(nombre: string = 'Sin Nombre', gano: boolean = false, jugador: string = 'natalia natalia') {
+    this.nombre = nombre;
+    this.gano = gano;
+    this.jugador = jugador;
   }
 
   public abstract verificar(): boolean;

@@ -1,7 +1,7 @@
 import { Partida } from './Partida';
 
 export class PartidaAdivina extends Partida {
-  numeroSecreto: number = 0;
+  numeroSecreto = 0;
   numeroIngresado = 0;
 
   constructor(nombre?: string, gano?: boolean, jugador?: string) {
@@ -9,11 +9,12 @@ export class PartidaAdivina extends Partida {
   }
 
   public verificar() {
-    if (this.numeroIngresado === this.numeroSecreto) {
+    if (this.numeroIngresado == this.numeroSecreto) {
       this.gano = true;
     }
     return this.gano;
   }
+
   public generarnumero() {
     this.numeroSecreto = Math.floor((Math.random() * 100) + 1);
     console.info('numero Secreto:' + this.numeroSecreto);

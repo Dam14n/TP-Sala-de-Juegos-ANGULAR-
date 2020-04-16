@@ -33,6 +33,8 @@ import { JugadoresService } from './servicios/jugadores.service';
 import { MiHttpService } from './servicios/mi-http/mi-http.service';
 import { PaisesService } from './servicios/paises.service';
 import { CardJuegoComponent } from './componentes/card-juego/card-juego.component';
+import { MemotestComponent } from './componentes/memotest/memotest.component';
+import { PptComponent } from './componentes/ppt/ppt.component';
 
 @NgModule({
   declarations: [
@@ -59,7 +61,9 @@ import { CardJuegoComponent } from './componentes/card-juego/card-juego.componen
     JugadoresListadoComponent,
     InputJugadoresComponent,
     SexoPipe,
-    CardJuegoComponent
+    CardJuegoComponent,
+    MemotestComponent,
+    PptComponent
   ],
   imports: [
     BrowserModule,
