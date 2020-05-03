@@ -48,6 +48,12 @@ export class LoginComponent implements OnInit {
     this.authService.login(usuario, clave, this.moverBarraDeProgreso);
   }
 
+  entrarComoAdmin() {
+    this.loginForm.controls.usuario.setValue('admin');
+    this.loginForm.controls.clave.setValue('admin');
+    this.entrar();
+  }
+
   public moverBarraDeProgreso = () => {
     const timer = TimerObservable.create(200, 50);
     this.logeando = true;

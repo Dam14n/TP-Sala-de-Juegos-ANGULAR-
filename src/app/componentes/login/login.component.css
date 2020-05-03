@@ -76,3 +76,9 @@ input:focus {
   padding: 0px;
   margin: -14px 0px 5px 0px;
 }
+
+.space-between {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
