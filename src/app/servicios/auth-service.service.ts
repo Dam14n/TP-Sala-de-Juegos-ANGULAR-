@@ -24,4 +24,9 @@ export class AuthService {
     localStorage.removeItem('usuario');
   }
 
+  registrarUsuario(usuario: any, clave: any) {
+    throw new Error("Method not implemented.");
+  }
+
+
 }
