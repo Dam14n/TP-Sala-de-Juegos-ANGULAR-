@@ -42,18 +42,18 @@ export class LoginComponent implements OnInit {
   }
 
   entrar() {
-    this.intentoHacerLogin = true;
-    const usuario = this.loginForm.value.usuario;
-    const clave = this.loginForm.value.clave;
-    this.authService.login(usuario, clave, this.moverBarraDeProgreso, this.onLoginError);
+    if (!this.loginForm.invalid) {
+      this.intentoHacerLogin = true;
+      const usuario = this.loginForm.value.usuario;
+      const clave = this.loginForm.value.clave;
+      this.authService.login(usuario, clave, this.moverBarraDeProgreso, this.onLoginError);
+    }
   }
 
   entrarComoAdmin() {
-    if (!this.loginForm.invalid) {
-      this.loginForm.controls.usuario.setValue('admin');
-      this.loginForm.controls.clave.setValue('admin');
-      this.entrar();
-    }
+    this.loginForm.controls.usuario.setValue('admin');
+    this.loginForm.controls.clave.setValue('admin');
+    this.entrar();
   }
 
   onLoginError = () => {
@@ -62,7 +62,7 @@ export class LoginComponent implements OnInit {
     let time = 0;
     this.subscription = timer.subscribe(t => {
       time = time + 1;
-      if (time === 50){
+      if (time === 50) {
         this.showInvalidLogin = false;
       }
     });
