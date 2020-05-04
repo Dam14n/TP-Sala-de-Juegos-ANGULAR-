@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "tp-saladejuegosdamianjorda": {
+      "hosting": {
+        "sala-de-juegos": [
+          "tp-saladejuegosdamianjorda"
+        ]
+      }
+    }
+  }
+}

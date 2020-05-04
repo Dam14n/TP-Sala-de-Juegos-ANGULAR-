@@ -1,5 +1,8 @@
 import { AgmCoreModule } from '@agm/core';
 import { NgModule } from '@angular/core';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireAnalyticsModule } from '@angular/fire/analytics';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { MatButtonModule } from '@angular/material/button';
@@ -8,6 +11,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { environment } from './../environments/environment';
 import { AppComponent } from './app.component';
 import { AdivinaElNumeroComponent } from './componentes/adivina-el-numero/adivina-el-numero.component';
 import { AdivinaMasListadoComponent } from './componentes/adivina-mas-listado/adivina-mas-listado.component';
@@ -55,6 +59,17 @@ import { PartidaService } from './servicios/partida-service.service';
 })
 export class MaterialModule { }
 
+/**
+ * NgModule that includes all Firebase modules.
+*/
+@NgModule({
+  exports: [
+    AngularFireAnalyticsModule,
+    AngularFirestoreModule
+  ]
+})
+export class FirebaseModule { }
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -86,6 +101,7 @@ export class MaterialModule { }
   ],
   imports: [
     BrowserModule,
+    AngularFireModule.initializeApp(environment.firebase),
     FormsModule,
     ReactiveFormsModule,
     RuteandoModule,
@@ -94,7 +110,8 @@ export class MaterialModule { }
       apiKey: 'AIzaSyB6f8x4IjRlesQ3oETc6BXYQHVRTOlY3Ys'
     }),
     BrowserAnimationsModule,
-    MaterialModule
+    MaterialModule,
+    FirebaseModule
   ],
   providers: [PartidaService, MiHttpService, PaisesService, ArchivosJugadoresService, JugadoresService],
   bootstrap: [AppComponent]

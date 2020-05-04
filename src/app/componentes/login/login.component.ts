@@ -1,10 +1,9 @@
-import { AuthService } from './../../servicios/auth-service.service';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { TimerObservable } from 'rxjs/observable/TimerObservable';
-import { NgForm } from '@angular/forms';
+import { AuthService } from './../../servicios/auth-service.service';
 
 @Component({
   selector: 'app-login',
@@ -18,6 +17,7 @@ export class LoginComponent implements OnInit {
   logeando = false;
   progresoDeAncho: string;
   intentoHacerLogin = false;
+  showInvalidLogin = false;
 
   clase = 'progress-bar progress-bar-info progress-bar-striped ';
   loginForm = new FormGroup({
@@ -45,13 +45,27 @@ export class LoginComponent implements OnInit {
     this.intentoHacerLogin = true;
     const usuario = this.loginForm.value.usuario;
     const clave = this.loginForm.value.clave;
-    this.authService.login(usuario, clave, this.moverBarraDeProgreso);
+    this.authService.login(usuario, clave, this.moverBarraDeProgreso, this.onLoginError);
   }
 
   entrarComoAdmin() {
-    this.loginForm.controls.usuario.setValue('admin');
-    this.loginForm.controls.clave.setValue('admin');
-    this.entrar();
+    if (!this.loginForm.invalid) {
+      this.loginForm.controls.usuario.setValue('admin');
+      this.loginForm.controls.clave.setValue('admin');
+      this.entrar();
+    }
+  }
+
+  onLoginError = () => {
+    this.showInvalidLogin = true;
+    const timer = TimerObservable.create(200, 50);
+    let time = 0;
+    this.subscription = timer.subscribe(t => {
+      time = time + 1;
+      if (time === 50){
+        this.showInvalidLogin = false;
+      }
+    });
   }
 
   public moverBarraDeProgreso = () => {
