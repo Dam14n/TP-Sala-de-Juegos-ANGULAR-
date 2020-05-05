@@ -1,3 +1,4 @@
+import { TatetiComponent } from './../componentes/tateti/tateti.component';
 import { NgModule } from '@angular/core';
 // importo del module principal
 import { RouterModule } from '@angular/router';
@@ -42,7 +43,8 @@ const MiRuteo = [
       { path: 'Agilidad', component: AgilidadAritmeticaComponent },
       { path: 'PPT', component: PptComponent },
       { path: 'Anagrama', component: AnagramaComponent },
-      { path: 'Memotest', component: MemotestComponent }],
+      { path: 'Memotest', component: MemotestComponent },
+      { path: 'Tateti', component: TatetiComponent }],
     canActivate: [AuthGuardService]
   },
   { path: '**', component: ErrorComponent },

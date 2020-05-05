@@ -8,6 +8,7 @@ import { HttpModule } from '@angular/http';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatGridListModule } from '@angular/material/grid-list';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { BrowserModule } from '@angular/platform-browser';
@@ -38,6 +39,7 @@ import { PptComponent } from './componentes/ppt/ppt.component';
 import { PrincipalComponent } from './componentes/principal/principal.component';
 import { QuienSoyComponent } from './componentes/quien-soy/quien-soy.component';
 import { RegistroComponent } from './componentes/registro/registro.component';
+import { TatetiComponent } from './componentes/tateti/tateti.component';
 import { SexoPipe } from './pipes/sexo.pipe';
 import { RuteandoModule } from './ruteando/ruteando.module';
 import { ArchivosJugadoresService } from './servicios/archivos-jugadores.service';
@@ -57,7 +59,8 @@ import { PartidaService } from './servicios/partida-service.service';
     MatInputModule,
     MatButtonModule,
     MatIconModule,
-    MatCardModule
+    MatCardModule,
+    MatGridListModule
   ]
 })
 export class MaterialModule { }
@@ -100,7 +103,8 @@ export class FirebaseModule { }
     SexoPipe,
     CardJuegoComponent,
     MemotestComponent,
-    PptComponent
+    PptComponent,
+    TatetiComponent
   ],
   imports: [
     BrowserModule,

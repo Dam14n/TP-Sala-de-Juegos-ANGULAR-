@@ -15,6 +15,7 @@ export class JuegoService {
     miArray.push(new Game('./assets/imagenes/adivina.png', 'Adivina el número secreto', 'Juego de estrategia', 'Adivina'));
     miArray.push(new Game('./assets/imagenes/anagrama.png', 'Adivina la palabra', 'Juego de destreza', 'Anagrama'));
     miArray.push(new Game('./assets/imagenes/memotest.png', 'Encuentra el igual', 'Juego de habilidad', 'Memotest'));
+    miArray.push(new Game('./assets/imagenes/tateti.jpg', 'Famoso juego TaTeTi', 'Juego de habilidad', 'Tateti'));
     return miArray;
   }
 }

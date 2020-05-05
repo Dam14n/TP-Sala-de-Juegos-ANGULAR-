@@ -37,8 +37,8 @@ export class AnagramaComponent implements OnInit {
         this.finalizarPartida();
       }
     }, 900);
-
   }
+
   verificar() {
     if (this.partida.verificar()) {
       this.finalizarPartida();
