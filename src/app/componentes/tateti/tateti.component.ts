@@ -30,6 +30,7 @@ export class TatetiComponent implements OnInit {
 
   insertarFicha(ficha: FichaTateti) {
     if (this.partida.puedeCambiarValorFicha(ficha) && !this.ganador) {
+      this.fichasUsadas++;
       ficha.cambiarValor(this.valorFichaJugador);
       if (this.partida.verificar()) {
         console.log('gano');
