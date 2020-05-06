@@ -1,6 +1,5 @@
 .imagenDeQuienSoy {
   width: 100%;
-
 }
 
 body {
@@ -18,13 +17,13 @@ p {
 }
 
 .bg-1 {
-  background-color: #1abc9c;
+  background-color: grey;
   /* Green */
   color: #ffffff;
 }
 
 .bg-2 {
-  background-color: #474e5d;
+  background-color: grey;
   /* Dark Blue */
   color: #ffffff;
 }
@@ -58,4 +57,26 @@ p {
 
 .navbar-nav li a:hover {
   color: #1abc9c !important;
+}
+
+.container-principal {
+  display: flex;
+}
+
+.card {
+  width: 350px;
+}
+
+.card img {
+  width: 300px;
+  height: 350px;
+}
+
+.mat-card-header {
+  justify-content: center;
+}
+
+.flex-container-center {
+  display: flex;
+  justify-content: center;
 }
