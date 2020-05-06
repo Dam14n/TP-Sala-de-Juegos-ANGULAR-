@@ -34,8 +34,9 @@ export class TatetiComponent implements OnInit {
       if (this.partida.verificar()) {
         console.log('gano');
         this.ganador = this.valorFichaJugador;
+      } else {
+        this.cambiarValorFichaJugador();
       }
-      this.cambiarValorFichaJugador();
     }
   }
 
@@ -52,6 +53,10 @@ export class TatetiComponent implements OnInit {
     this.valorFichaJugador = 'X';
     this.ganador = undefined;
     this.iniciarPartida();
+  }
+
+  obtenerImagenGanador(): string {
+    return this.valorFichaJugador === 'X' ? './assets/imagenes/X.png' : './assets/imagenes/O.png';
   }
 
 }

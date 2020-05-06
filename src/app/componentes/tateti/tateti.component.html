@@ -1,11 +1,16 @@
-<div class="grid-container">
-  <mat-grid-list cols="3" rowHeight="2:1">
-    <mat-grid-tile *ngFor="let ficha of fichas">
-      <button mat-button class="default-button" (click)="insertarFicha(ficha)">{{ficha.valor}}</button>
-    </mat-grid-tile>
-  </mat-grid-list>
-</div>
-<div class="button-container">
-  <button mat-raised-button color="warn" [disabled]="!terminoPartida()" (click)="reiniciarPartida()">VOLVER A
-    JUGAR</button>
+<div class="landing-container">
+  <div class="grid-container">
+    <mat-grid-list cols="3" rowHeight="2:1">
+      <mat-grid-tile *ngFor="let ficha of fichas">
+        <button mat-button class="default-button" (click)="insertarFicha(ficha)">{{ficha.valor}}</button>
+      </mat-grid-tile>
+    </mat-grid-list>
+    <div class="button-container">
+      <button mat-raised-button color="warn" [disabled]="!terminoPartida()" (click)="reiniciarPartida()">VOLVER A
+        JUGAR</button>
+    </div>
+  </div>
+  <app-tateti-ganador class="card" [hidden]="!ganador" [imagen]="obtenerImagenGanador()"
+    [valorFichaJugador]="valorFichaJugador">
+  </app-tateti-ganador>
 </div>

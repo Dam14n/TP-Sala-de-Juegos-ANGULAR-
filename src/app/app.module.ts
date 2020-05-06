@@ -39,6 +39,7 @@ import { PptComponent } from './componentes/ppt/ppt.component';
 import { PrincipalComponent } from './componentes/principal/principal.component';
 import { QuienSoyComponent } from './componentes/quien-soy/quien-soy.component';
 import { RegistroComponent } from './componentes/registro/registro.component';
+import { TatetiGanadorComponent } from './componentes/tateti-ganador/tateti-ganador.component';
 import { TatetiComponent } from './componentes/tateti/tateti.component';
 import { SexoPipe } from './pipes/sexo.pipe';
 import { RuteandoModule } from './ruteando/ruteando.module';
@@ -104,7 +105,8 @@ export class FirebaseModule { }
     CardJuegoComponent,
     MemotestComponent,
     PptComponent,
-    TatetiComponent
+    TatetiComponent,
+    TatetiGanadorComponent
   ],
   imports: [
     BrowserModule,
