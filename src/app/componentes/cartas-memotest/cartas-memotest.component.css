@@ -1,0 +1,17 @@
+.cartas-container {
+  display: flex;
+  justify-content: center;
+}
+
+.card {
+  margin: 20px;
+  width: 150px;
+}
+
+.card img {
+  height: 185px;
+}
+
+.seleccionable {
+  cursor: not-allowed;
+}

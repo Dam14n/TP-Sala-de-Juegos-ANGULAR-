@@ -1,1 +1,3 @@
-<p>memotest works!</p>
+<app-dificultad-memotest *ngIf="elegirDificultad" (onElegirDificultad)="iniciarPartida($event)"></app-dificultad-memotest>
+<app-cartas-memotest *ngIf="mostrarCartas" [cartas]="cartas" (onSeleccionarCarta)="cartaSeleccionada($event)"></app-cartas-memotest>
+<app-temporizador-memotest *ngIf="mostrarTimer"></app-temporizador-memotest>

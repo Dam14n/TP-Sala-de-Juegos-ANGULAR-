@@ -22,6 +22,8 @@ import { AgilidadMasListadoComponent } from './componentes/agilidad-mas-listado/
 import { AnagramaComponent } from './componentes/anagrama/anagrama.component';
 import { CabeceraComponent } from './componentes/cabecera/cabecera.component';
 import { CardJuegoComponent } from './componentes/card-juego/card-juego.component';
+import { CartasMemotestComponent } from './componentes/cartas-memotest/cartas-memotest.component';
+import { DificultadMemotestComponent } from './componentes/dificultad-memotest/dificultad-memotest.component';
 import { ErrorComponent } from './componentes/error/error.component';
 import { InputJugadoresComponent } from './componentes/input-jugadores/input-jugadores.component';
 import { JuegosComponent } from './componentes/juegos/juegos.component';
@@ -41,6 +43,7 @@ import { QuienSoyComponent } from './componentes/quien-soy/quien-soy.component';
 import { RegistroComponent } from './componentes/registro/registro.component';
 import { TatetiGanadorComponent } from './componentes/tateti-ganador/tateti-ganador.component';
 import { TatetiComponent } from './componentes/tateti/tateti.component';
+import { TemporizadorMemotestComponent } from './componentes/temporizador-memotest/temporizador-memotest.component';
 import { SexoPipe } from './pipes/sexo.pipe';
 import { RuteandoModule } from './ruteando/ruteando.module';
 import { ArchivosJugadoresService } from './servicios/archivos-jugadores.service';
@@ -106,7 +109,10 @@ export class FirebaseModule { }
     MemotestComponent,
     PptComponent,
     TatetiComponent,
-    TatetiGanadorComponent
+    TatetiGanadorComponent,
+    DificultadMemotestComponent,
+    CartasMemotestComponent,
+    TemporizadorMemotestComponent
   ],
   imports: [
     BrowserModule,

@@ -37,8 +37,8 @@ export class AgilidadAritmeticaComponent implements OnInit {
         this.finalizarPartida();
       }
     }, 900);
-
   }
+
   verificar() {
     if (this.partida.verificar()) {
       this.finalizarPartida();
