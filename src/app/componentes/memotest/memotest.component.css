@@ -1,4 +1,21 @@
 .cartas-container {
-  display: flex;
+  display: inline-flex;
   justify-content: center;
+  width: 80%;
+  flex-wrap: wrap;
+}
+
+.main-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.footer-container {
+  display: flex;
+  margin: 20px;
+}
+
+.footer-container button {
+  margin-left: 20px;
 }

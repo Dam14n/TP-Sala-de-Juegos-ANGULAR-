@@ -65,6 +65,13 @@ export class PartidaMemotest extends Partida {
         this.ALL_CARDS.push(new CartaMemotest('./assets/imagenes/carta2.jpg', 'CAPITAN AMERICA'));
         this.ALL_CARDS.push(new CartaMemotest('./assets/imagenes/carta3.jpg', 'THOR'));
         this.ALL_CARDS.push(new CartaMemotest('./assets/imagenes/carta4.jpg', 'HULK'));
+        this.ALL_CARDS.push(new CartaMemotest('./assets/imagenes/carta5.jpg', 'VIUDA NEGRA'));
+        this.ALL_CARDS.push(new CartaMemotest('./assets/imagenes/carta6.jpg', 'VISION'));
+        this.ALL_CARDS.push(new CartaMemotest('./assets/imagenes/carta7.jpg', 'DR STRANGE'));
+        this.ALL_CARDS.push(new CartaMemotest('./assets/imagenes/carta8.jpg', 'PANTERA NEGRA'));
+        this.ALL_CARDS.push(new CartaMemotest('./assets/imagenes/carta9.jpg', 'ANT MAN'));
+        this.ALL_CARDS.push(new CartaMemotest('./assets/imagenes/carta10.jpg', 'SPIDER MAN'));
+        this.ALL_CARDS.push(new CartaMemotest('./assets/imagenes/carta11.jpg', 'GAMORA'));
     }
 
     // Code from https://javascript.info/task/shuffle

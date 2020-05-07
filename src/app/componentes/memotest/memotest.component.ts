@@ -93,6 +93,14 @@ export class MemotestComponent implements OnInit {
       });
   }
 
+  onPerder = () => {
+    const mensajePerdedor = this.mostrarMensajePerdedor()
+    .afterDismissed()
+    .subscribe(value => {
+      mensajePerdedor.unsubscribe();
+      this.reiniciarPartida();
+    });
+  }
 
   actualizarVista() {
     this.navegarA('Juegos/Memotest');
@@ -113,6 +121,12 @@ export class MemotestComponent implements OnInit {
   mostrarMensajeGanador(): MatSnackBarRef<SimpleSnackBar> {
     return this.snackBar.open('Tenemos un ganador felicidades!!!!', '', {
       duration: 5 * 1000
+    });
+  }
+
+  mostrarMensajePerdedor(): MatSnackBarRef<SimpleSnackBar> {
+    return this.snackBar.open('Se te acabo el tiempo, PERDISTE JAJAJAJA!!!!', '', {
+      duration: 3 * 1000
     });
   }
 
