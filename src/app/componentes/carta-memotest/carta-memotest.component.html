@@ -1,0 +1,6 @@
+<mat-card class="card" (click)="seleccionarCarta(carta)" [ngClass]="{'seleccionable': carta.estaBloqueada()}">
+  <img mat-card-image [src]="mostrarImagen(carta)" alt="">
+  <mat-card-content *ngIf="carta.estaSeleccionada() || carta.estaBloqueada()">
+    <mat-card-title>{{carta.getNombre()}}</mat-card-title>
+  </mat-card-content>
+</mat-card>

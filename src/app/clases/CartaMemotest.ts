@@ -1,18 +1,18 @@
 export class CartaMemotest {
     seleccionada: boolean;
     bloqueada: boolean;
-    DEFAULT_IMAGE = './assets/imagenes/dorsoCarta.jpg';
+    DORSO_CARTA = './assets/imagenes/dorsoCarta.jpg';
 
     constructor(private imagen: string, private nombre: string) {
         this.bloqueada = false;
     }
 
-    getImagenReal() {
+    getImagen(): string {
         return this.imagen;
     }
 
-    getImagen(): string {
-        return this.bloqueada ? this.imagen : this.seleccionada ? this.imagen : this.DEFAULT_IMAGE;
+    getDorso(): string {
+        return this.DORSO_CARTA;
     }
 
     seleccionar() {
@@ -27,11 +27,15 @@ export class CartaMemotest {
         this.bloqueada = true;
     }
 
+    desbloquear() {
+        this.bloqueada = false;
+    }
+
     estaBloqueada(): boolean {
         return this.bloqueada;
     }
 
-    estaSeleccioanda(): boolean {
+    estaSeleccionada(): boolean {
         return this.seleccionada;
     }
 

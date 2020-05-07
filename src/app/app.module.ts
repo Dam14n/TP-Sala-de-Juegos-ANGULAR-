@@ -23,7 +23,7 @@ import { AgilidadMasListadoComponent } from './componentes/agilidad-mas-listado/
 import { AnagramaComponent } from './componentes/anagrama/anagrama.component';
 import { CabeceraComponent } from './componentes/cabecera/cabecera.component';
 import { CardJuegoComponent } from './componentes/card-juego/card-juego.component';
-import { CartasMemotestComponent } from './componentes/cartas-memotest/cartas-memotest.component';
+import { CartaMemotestComponent } from './componentes/carta-memotest/carta-memotest.component';
 import { DificultadMemotestComponent } from './componentes/dificultad-memotest/dificultad-memotest.component';
 import { ErrorComponent } from './componentes/error/error.component';
 import { InputJugadoresComponent } from './componentes/input-jugadores/input-jugadores.component';
@@ -113,7 +113,7 @@ export class FirebaseModule { }
     TatetiComponent,
     TatetiGanadorComponent,
     DificultadMemotestComponent,
-    CartasMemotestComponent,
+    CartaMemotestComponent,
     TemporizadorMemotestComponent
   ],
   imports: [

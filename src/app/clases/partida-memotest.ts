@@ -16,7 +16,7 @@ export class PartidaMemotest extends Partida {
     }
 
     public verificar(): boolean {
-        return this.IN_GAME_CARDS.every(carta => carta.estaSeleccioanda() && carta.estaBloqueada());
+        return this.IN_GAME_CARDS.every(carta => carta.estaSeleccionada() && carta.estaBloqueada());
     }
 
     public iniciarPartida(dificultad: Dificultad) {
@@ -50,7 +50,7 @@ export class PartidaMemotest extends Partida {
     }
 
     private duplicarCarta(carta: CartaMemotest): CartaMemotest {
-        return new CartaMemotest(carta.getImagenReal(), carta.getNombre());
+        return new CartaMemotest(carta.getImagen(), carta.getNombre());
     }
 
     private eliminarDeListado(listado: Array<CartaMemotest>, carta: CartaMemotest) {

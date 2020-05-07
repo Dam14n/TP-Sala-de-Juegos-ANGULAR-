@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CartasMemotestComponent } from './cartas-memotest.component';
+import { CartaMemotestComponent } from './carta-memotest.component';
 
 describe('CartasMemotestComponent', () => {
-  let component: CartasMemotestComponent;
-  let fixture: ComponentFixture<CartasMemotestComponent>;
+  let component: CartaMemotestComponent;
+  let fixture: ComponentFixture<CartaMemotestComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CartasMemotestComponent ]
+      declarations: [ CartaMemotestComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CartasMemotestComponent);
+    fixture = TestBed.createComponent(CartaMemotestComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
