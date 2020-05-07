@@ -1,9 +1,11 @@
+import { ParDeCartas } from './../../clases/ParDeCartas';
 import { Router } from '@angular/router';
 import { CartaMemotest } from './../../clases/CartaMemotest';
 import { Component, EventEmitter, OnInit, Output, NgZone } from '@angular/core';
 import { Dificultad } from './../../clases/Dificultad';
 import { PartidaMemotest } from './../../clases/partida-memotest';
 import { MatSnackBar, MatSnackBarRef, SimpleSnackBar } from '@angular/material/snack-bar';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-memotest',
@@ -15,18 +17,23 @@ export class MemotestComponent implements OnInit {
   partida: PartidaMemotest;
   elegirDificultad = true;
   mostrarTimer = false;
-  cartas = [];
-  ultimaCarta: CartaMemotest;
+  cartas: Array<CartaMemotest>;
   duracionEnSegundos = 1;
+  unParDeCartas: ParDeCartas;
+  paresDeCartas: Array<ParDeCartas>;
 
   constructor(private snackBar: MatSnackBar, private router: Router, private ngZone: NgZone) {
     this.partida = new PartidaMemotest();
+    this.cartas = new Array<CartaMemotest>();
   }
 
   ngOnInit(): void {
   }
 
   iniciarPartida(dificultad: Dificultad) {
+    this.paresDeCartas = new Array<ParDeCartas>();
+    this.unParDeCartas = new ParDeCartas();
+    this.paresDeCartas.push(this.unParDeCartas);
     this.elegirDificultad = false;
     this.partida = new PartidaMemotest();
     this.partida.iniciarPartida(dificultad);
@@ -43,37 +50,49 @@ export class MemotestComponent implements OnInit {
   cartaSeleccionada(carta: CartaMemotest) {
     carta.seleccionar();
     carta.bloquear();
-    if (!this.ultimaCarta) {
-      this.ultimaCarta = carta;
-      return;
-    }
-    if (this.esIgualALaUltimaCartaElegida(carta)) {
-      this.ultimaCarta.bloquear();
-      if (this.partida.verificar()) {
-        const observableSnackbar = this.mostrarMensajeGanador()
-          .afterDismissed()
-          .subscribe(value => {
-            observableSnackbar.unsubscribe();
-            this.reiniciarPartida();
-          });
-      } else {
-        this.mostrarMensajeCartaIgual();
-      }
-      this.ultimaCarta = undefined;
-    } else {
-      const mensajeCartasDistintas = this.mostrarMensajeCartaDistinta()
-        .afterDismissed()
-        .subscribe(value => {
-          mensajeCartasDistintas.unsubscribe();
-          this.ultimaCarta.desbloquear();
-          this.ultimaCarta.noSeleccionar();
-          carta.desbloquear();
-          carta.noSeleccionar();
-          this.ultimaCarta = undefined;
-          this.actualizarVista();
-        });
+    this.unParDeCartas.agregar(carta, () => {
+      this.unParDeCartas = new ParDeCartas();
+      this.paresDeCartas.push(this.unParDeCartas);
+      this.unParDeCartas.agregar(carta, () => { });
+    });
+    this.paresDeCartas.forEach(par => par.verificar(this.onCartasIguales, this.onCartasDistintas));
+    if (this.gano()) {
+      this.onGanar();
     }
   }
+
+  gano(): boolean {
+    return this.cartas.every(carta => carta.estaBloqueada());
+  }
+
+  onCartasIguales = () => {
+    const mensajeCartasIguales = this.mostrarMensajeCartaIgual()
+      .afterDismissed()
+      .subscribe(value => {
+        mensajeCartasIguales.unsubscribe();
+        this.actualizarVista();
+      });
+  }
+
+  onCartasDistintas = (parDeCartas: ParDeCartas) => {
+    const mensajeCartasDistintas = this.mostrarMensajeCartaDistinta()
+      .afterDismissed()
+      .subscribe(value => {
+        mensajeCartasDistintas.unsubscribe();
+        parDeCartas.ocultarCartasDistintas();
+        this.actualizarVista();
+      });
+  }
+
+  onGanar = () => {
+    const mensajeGanador = this.mostrarMensajeGanador()
+      .afterDismissed()
+      .subscribe(value => {
+        mensajeGanador.unsubscribe();
+        this.reiniciarPartida();
+      });
+  }
+
 
   actualizarVista() {
     this.navegarA('Juegos/Memotest');
@@ -93,7 +112,7 @@ export class MemotestComponent implements OnInit {
 
   mostrarMensajeGanador(): MatSnackBarRef<SimpleSnackBar> {
     return this.snackBar.open('Tenemos un ganador felicidades!!!!', '', {
-      duration: this.duracionEnSegundos * 1000
+      duration: 5 * 1000
     });
   }
 
@@ -101,13 +120,8 @@ export class MemotestComponent implements OnInit {
     this.elegirDificultad = true;
     this.mostrarTimer = false;
     this.cartas = [];
-    this.ultimaCarta = undefined;
     // TODO view is not being refreshed
     this.actualizarVista();
-  }
-
-  esIgualALaUltimaCartaElegida(carta: CartaMemotest) {
-    return this.ultimaCarta.getNombre() === carta.getNombre();
   }
 
   navegarA(link: string) {
