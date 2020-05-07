@@ -24,7 +24,6 @@ export class CartaMemotest {
     }
 
     bloquear() {
-        this.seleccionada = false;
         this.bloqueada = true;
     }
 
