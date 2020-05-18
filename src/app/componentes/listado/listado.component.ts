@@ -18,12 +18,21 @@ export class ListadoComponent implements OnInit {
   ngOnInit() { }
 
   llamaService() {
+    this.listadoParaCompartir = [];
     this.listadoParaCompartir = this.miServicioJuego.listar();
   }
 
   llamaServicePromesa() {
+    this.listadoParaCompartir = [];
     this.miServicioJuego.listarPromesa().then((listado) => {
       this.listadoParaCompartir = listado;
+    });
+  }
+
+  llamaServiceObs() {
+    this.listadoParaCompartir = [];
+    this.miServicioJuego.obtenerPartidas().subscribe((partidas) => {
+      this.listadoParaCompartir = partidas;
     });
   }
 

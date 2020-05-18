@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Observable } from 'rxjs/Observable';
 import { Partida } from '../clases/Partida';
+import { take } from 'rxjs/operators';
 
 @Injectable()
 export class PartidaService {
@@ -29,8 +30,8 @@ export class PartidaService {
     return this.partidas;
   }
 
-  public listarPromesa(): Promise<Array<Partida>> {
-    return this.partidas.toPromise();
+  public listarPromesa(): Promise<Array<any>> {
+    return this.partidas.pipe(take(1)).toPromise();
   }
 
   public guardarPartida = (partida: Partida) => {
