@@ -7,7 +7,7 @@ export class PartidaTateti extends Partida {
     private LINEAS: Array<LineaTateti>;
 
     constructor(nombre?: string, gano?: boolean, jugador?: string) {
-        super('Elige la opcion correcta', gano, jugador);
+        super('Famoso juego TaTeTi', gano, jugador);
         this.iniciarPartida();
     }
 

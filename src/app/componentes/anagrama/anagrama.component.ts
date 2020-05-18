@@ -27,7 +27,7 @@ export class AnagramaComponent implements OnInit {
   }
 
   iniciarPartida() {
-    this.partida = new PartidaAnagrama();
+    this.partida = new PartidaAnagrama(undefined, undefined, this.usuarioService.obtenerUsuarioActual().usuario);
     this.partida.iniciarPartida();
     console.log('Respuesta palabra: ' + this.partida.palabra);
     this.ocultarVerificar = false;

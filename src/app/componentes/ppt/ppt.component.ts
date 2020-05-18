@@ -1,4 +1,6 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../../servicios/auth-service.service';
+import { PartidaService } from '../../servicios/partida.service';
 import { Mano } from './../../clases/Mano';
 import { ManoVisitor } from './../../clases/ManoVisitor';
 import { Papel } from './../../clases/Papel';
@@ -12,34 +14,40 @@ import { Tijera } from './../../clases/Tijera';
   styleUrls: ['./ppt.component.css']
 })
 export class PptComponent implements OnInit {
-  @Output() guardarPartida: EventEmitter<any> = new EventEmitter<any>();
   partida: PartidaPiedraPapelTijera;
   manos: Array<Mano> = [new Piedra(), new Papel(), new Tijera()];
+  termino = false;
+  estado: string = 'TIENE QUE SELECCIONAR UNA OPCION!!!';
 
   ngOnInit() {
     this.partida.iniciarPartida();
   }
 
-  constructor() {
+  constructor(private usuarioService: AuthService, private partidaService: PartidaService) {
     console.info('Inicio Piedra Papel o Tijera');
     this.iniciarPartida();
   }
 
   iniciarPartida() {
-    this.partida = new PartidaPiedraPapelTijera();
+    this.termino = false;
+    this.partida = new PartidaPiedraPapelTijera(undefined, undefined, this.usuarioService.obtenerUsuarioActual().usuario);
     this.partida.iniciarPartida();
     console.info('Mano IA: ', this.partida.manoIA);
+    this.estado = 'TIENE QUE SELECCIONAR UNA OPCION!!!';
   }
 
   verificar(mano: ManoVisitor) {
-    this.partida.manoElegida = mano;
-    if (this.partida.verificar()) {
-      this.finalizarPartida();
+    if (this.termino) {
+      return;
     }
+    this.termino = true;
+    this.partida.manoElegida = mano;
+    this.estado = this.partida.verificar() ? 'USTED GANOOOOOO!!!!' : 'USTED PERDIOOOOO!!!!';
+    this.finalizarPartida();
   }
 
   private finalizarPartida() {
-    this.guardarPartida.emit(this.partida);
+    this.partidaService.guardarPartida(this.partida);
     this.partida.manoElegida = null;
   }
 

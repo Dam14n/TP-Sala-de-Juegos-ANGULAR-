@@ -1,11 +1,12 @@
-import { ParDeCartas } from './../../clases/ParDeCartas';
-import { Router } from '@angular/router';
-import { CartaMemotest } from './../../clases/CartaMemotest';
-import { Component, EventEmitter, OnInit, Output, NgZone } from '@angular/core';
-import { Dificultad } from './../../clases/Dificultad';
-import { PartidaMemotest } from './../../clases/partida-memotest';
+import { Component, OnInit } from '@angular/core';
 import { MatSnackBar, MatSnackBarRef, SimpleSnackBar } from '@angular/material/snack-bar';
-import { Subscription } from 'rxjs';
+import { Router, ActivatedRoute } from '@angular/router';
+import { AuthService } from '../../servicios/auth-service.service';
+import { PartidaService } from '../../servicios/partida.service';
+import { CartaMemotest } from './../../clases/CartaMemotest';
+import { Dificultad } from './../../clases/Dificultad';
+import { ParDeCartas } from './../../clases/ParDeCartas';
+import { PartidaMemotest } from './../../clases/partida-memotest';
 
 @Component({
   selector: 'app-memotest',
@@ -13,7 +14,6 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./memotest.component.css']
 })
 export class MemotestComponent implements OnInit {
-  @Output() guardarPartida: EventEmitter<any> = new EventEmitter<any>();
   partida: PartidaMemotest;
   elegirDificultad = true;
   mostrarTimer = false;
@@ -22,8 +22,8 @@ export class MemotestComponent implements OnInit {
   unParDeCartas: ParDeCartas;
   paresDeCartas: Array<ParDeCartas>;
 
-  constructor(private snackBar: MatSnackBar, private router: Router, private ngZone: NgZone) {
-    this.partida = new PartidaMemotest();
+  constructor(private snackBar: MatSnackBar, private router: Router, private usuarioService: AuthService, private partidaService: PartidaService,private route: ActivatedRoute) {
+    this.partida = new PartidaMemotest(undefined, undefined, this.usuarioService.obtenerUsuarioActual().usuario);
     this.cartas = new Array<CartaMemotest>();
   }
 
@@ -35,7 +35,7 @@ export class MemotestComponent implements OnInit {
     this.unParDeCartas = new ParDeCartas();
     this.paresDeCartas.push(this.unParDeCartas);
     this.elegirDificultad = false;
-    this.partida = new PartidaMemotest();
+    this.partida = new PartidaMemotest(undefined, undefined, this.usuarioService.obtenerUsuarioActual().usuario);
     this.partida.iniciarPartida(dificultad);
     if (dificultad === Dificultad.DIFICIL) {
       this.mostrarTimer = true;
@@ -62,7 +62,7 @@ export class MemotestComponent implements OnInit {
   }
 
   gano(): boolean {
-    return this.cartas.every(carta => carta.estaBloqueada());
+    return this.partida.verificar();
   }
 
   onCartasIguales = () => {
@@ -89,22 +89,21 @@ export class MemotestComponent implements OnInit {
       .afterDismissed()
       .subscribe(value => {
         mensajeGanador.unsubscribe();
-        this.guardarPartida.emit(this.partida)
         this.reiniciarPartida();
       });
   }
 
   onPerder = () => {
     const mensajePerdedor = this.mostrarMensajePerdedor()
-    .afterDismissed()
-    .subscribe(value => {
-      mensajePerdedor.unsubscribe();
-      this.reiniciarPartida();
-    });
+      .afterDismissed()
+      .subscribe(value => {
+        mensajePerdedor.unsubscribe();
+        this.reiniciarPartida();
+      });
   }
 
   actualizarVista() {
-    this.navegarA('Juegos/Memotest');
+    this.navegarA();
   }
 
   mostrarMensajeCartaIgual(): MatSnackBarRef<SimpleSnackBar> {
@@ -132,15 +131,18 @@ export class MemotestComponent implements OnInit {
   }
 
   reiniciarPartida() {
-    this.elegirDificultad = true;
-    this.mostrarTimer = false;
-    this.cartas = [];
-    // TODO view is not being refreshed
-    this.actualizarVista();
+    if (!this.elegirDificultad) {
+      this.partidaService.guardarPartida(this.partida);
+      this.elegirDificultad = true;
+      this.mostrarTimer = false;
+      this.cartas = [];
+      // TODO view is not being refreshed
+      this.actualizarVista();
+    }
   }
 
-  navegarA(link: string) {
-    this.router.navigate([link]);
+  navegarA() {
+    this.router.navigate([this.router.url]);
   }
 
 }

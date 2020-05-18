@@ -8,7 +8,7 @@ export class PartidaMemotest extends Partida {
     IN_GAME_CARDS: Array<CartaMemotest>;
 
     constructor(nombre?: string, gano?: boolean, jugador?: string) {
-        super('Elige la opcion correcta', gano, jugador);
+        super('Encuentra el igual', gano, jugador);
         this.ALL_CARDS = Array<CartaMemotest>();
         this.INITIAL_CARDS = Array<CartaMemotest>();
         this.IN_GAME_CARDS = Array<CartaMemotest>();

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../../servicios/auth-service.service';
+import { PartidaService } from '../../servicios/partida.service';
 import { FichaTateti } from './../../clases/FichaTateti';
 import { PartidaTateti } from './../../clases/Partida-tateti';
 
@@ -13,8 +15,9 @@ export class TatetiComponent implements OnInit {
   valorFichaJugador: string;
   ganador: string;
   fichasUsadas = 0;
+  partidaEstaGuardada = false;
 
-  constructor() {
+  constructor(private usuarioService: AuthService, private partidaService: PartidaService) {
     this.valorFichaJugador = 'X';
   }
 
@@ -23,7 +26,7 @@ export class TatetiComponent implements OnInit {
   }
 
   iniciarPartida() {
-    this.partida = new PartidaTateti();
+    this.partida = new PartidaTateti(undefined, undefined, this.usuarioService.obtenerUsuarioActual().usuario);
     this.partida.iniciarPartida();
     this.fichas = this.partida.getFichas();
   }
@@ -34,7 +37,9 @@ export class TatetiComponent implements OnInit {
       ficha.cambiarValor(this.valorFichaJugador);
       if (this.partida.verificar()) {
         console.log('gano');
+        this.partidaEstaGuardada = true;
         this.ganador = this.valorFichaJugador;
+        this.partidaService.guardarPartida(this.partida);
       } else {
         this.cambiarValorFichaJugador();
       }
@@ -46,13 +51,19 @@ export class TatetiComponent implements OnInit {
   }
 
   terminoPartida(): boolean {
-    return this.fichasUsadas === 9 || this.ganador !== undefined;
+    const terminoPartida = this.fichasUsadas === 9 || this.ganador !== undefined;
+    if (terminoPartida && !this.partidaEstaGuardada) {
+      this.partidaEstaGuardada = true;
+      this.partidaService.guardarPartida(this.partida);
+    }
+    return terminoPartida;
   }
 
   reiniciarPartida() {
     this.fichasUsadas = 0;
     this.valorFichaJugador = 'X';
     this.ganador = undefined;
+    this.partidaEstaGuardada = false;
     this.iniciarPartida();
   }
 

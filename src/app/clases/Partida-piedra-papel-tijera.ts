@@ -11,7 +11,7 @@ export class PartidaPiedraPapelTijera extends Partida {
     manoIA: ManoVisitor;
 
     constructor(nombre?: string, gano?: boolean, jugador?: string) {
-        super('Elige la opcion correcta', gano, jugador);
+        super('Piedra Papel o Tijera', gano, jugador);
     }
 
     public verificar(): boolean {

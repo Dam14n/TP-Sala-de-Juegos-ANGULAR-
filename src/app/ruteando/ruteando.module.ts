@@ -1,4 +1,3 @@
-import { TatetiComponent } from './../componentes/tateti/tateti.component';
 import { NgModule } from '@angular/core';
 // importo del module principal
 import { RouterModule } from '@angular/router';
@@ -6,19 +5,24 @@ import { AdivinaElNumeroComponent } from '../componentes/adivina-el-numero/adivi
 import { AdivinaMasListadoComponent } from '../componentes/adivina-mas-listado/adivina-mas-listado.component';
 import { AgilidadAritmeticaComponent } from '../componentes/agilidad-aritmetica/agilidad-aritmetica.component';
 import { AgilidadMasListadoComponent } from '../componentes/agilidad-mas-listado/agilidad-mas-listado.component';
+import { AnagramaMasListadoComponent } from '../componentes/anagrama-mas-listado/anagrama-mas-listado.component';
 import { ErrorComponent } from '../componentes/error/error.component';
 import { JuegosComponent } from '../componentes/juegos/juegos.component';
 import { JugadoresListadoComponent } from '../componentes/jugadores-listado/jugadores-listado.component';
 import { ListadoComponent } from '../componentes/listado/listado.component';
 import { LoginComponent } from '../componentes/login/login.component';
 import { MapaDeGoogleComponent } from '../componentes/mapa-de-google/mapa-de-google.component';
+import { MemotestMasListadoComponent } from '../componentes/memotest-mas-listado/memotest-mas-listado.component';
 import { MenuCardComponent } from '../componentes/menu-card/menu-card.component';
+import { PptMasListadoComponent } from '../componentes/ppt-mas-listado/ppt-mas-listado.component';
 import { PrincipalComponent } from '../componentes/principal/principal.component';
 import { QuienSoyComponent } from '../componentes/quien-soy/quien-soy.component';
 import { RegistroComponent } from '../componentes/registro/registro.component';
+import { TatetiMasListadoComponent } from '../componentes/tateti-mas-listado/tateti-mas-listado.component';
 import { AnagramaComponent } from './../componentes/anagrama/anagrama.component';
 import { MemotestComponent } from './../componentes/memotest/memotest.component';
 import { PptComponent } from './../componentes/ppt/ppt.component';
+import { TatetiComponent } from './../componentes/tateti/tateti.component';
 import { AuthGuardService } from './../servicios/auth-guard-service.service';
 
 const MiRuteo = [
@@ -37,12 +41,16 @@ const MiRuteo = [
       [{ path: '', component: MenuCardComponent },
       { path: 'Adivina', component: AdivinaElNumeroComponent },
       { path: 'AdivinaMasListado', component: AdivinaMasListadoComponent },
-      { path: 'AgilidadaMasListado', component: AgilidadMasListadoComponent },
       { path: 'Agilidad', component: AgilidadAritmeticaComponent },
+      { path: 'AgilidadMasListado', component: AgilidadMasListadoComponent },
       { path: 'PPT', component: PptComponent },
+      { path: 'PPTMasListado', component: PptMasListadoComponent },
       { path: 'Anagrama', component: AnagramaComponent },
+      { path: 'AnagramaMasListado', component: AnagramaMasListadoComponent },
       { path: 'Memotest', component: MemotestComponent },
-      { path: 'Tateti', component: TatetiComponent }],
+      { path: 'MemotestMasListado', component: MemotestMasListadoComponent },
+      { path: 'Tateti', component: TatetiComponent },
+      { path: 'TatetiMasListado', component: TatetiMasListadoComponent }],
     canActivate: [AuthGuardService]
   },
   { path: '**', component: ErrorComponent },

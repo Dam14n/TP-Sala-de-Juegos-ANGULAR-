@@ -20,6 +20,7 @@ import { AdivinaElNumeroComponent } from './componentes/adivina-el-numero/adivin
 import { AdivinaMasListadoComponent } from './componentes/adivina-mas-listado/adivina-mas-listado.component';
 import { AgilidadAritmeticaComponent } from './componentes/agilidad-aritmetica/agilidad-aritmetica.component';
 import { AgilidadMasListadoComponent } from './componentes/agilidad-mas-listado/agilidad-mas-listado.component';
+import { AnagramaMasListadoComponent } from './componentes/anagrama-mas-listado/anagrama-mas-listado.component';
 import { AnagramaComponent } from './componentes/anagrama/anagrama.component';
 import { CabeceraComponent } from './componentes/cabecera/cabecera.component';
 import { CardJuegoComponent } from './componentes/card-juego/card-juego.component';
@@ -34,14 +35,17 @@ import { ListadoComponent } from './componentes/listado/listado.component';
 import { ListadosComponent } from './componentes/listados/listados.component';
 import { LoginComponent } from './componentes/login/login.component';
 import { MapaDeGoogleComponent } from './componentes/mapa-de-google/mapa-de-google.component';
+import { MemotestMasListadoComponent } from './componentes/memotest-mas-listado/memotest-mas-listado.component';
 import { MemotestComponent } from './componentes/memotest/memotest.component';
 import { MenuCardComponent } from './componentes/menu-card/menu-card.component';
 import { MenuComponent } from './componentes/menu/menu.component';
+import { PptMasListadoComponent } from './componentes/ppt-mas-listado/ppt-mas-listado.component';
 import { PptComponent } from './componentes/ppt/ppt.component';
 import { PrincipalComponent } from './componentes/principal/principal.component';
 import { QuienSoyComponent } from './componentes/quien-soy/quien-soy.component';
 import { RegistroComponent } from './componentes/registro/registro.component';
 import { TatetiGanadorComponent } from './componentes/tateti-ganador/tateti-ganador.component';
+import { TatetiMasListadoComponent } from './componentes/tateti-mas-listado/tateti-mas-listado.component';
 import { TatetiComponent } from './componentes/tateti/tateti.component';
 import { TemporizadorMemotestComponent } from './componentes/temporizador-memotest/temporizador-memotest.component';
 import { SexoPipe } from './pipes/sexo.pipe';
@@ -110,7 +114,11 @@ export class FirebaseModule { }
     TatetiGanadorComponent,
     DificultadMemotestComponent,
     CartaMemotestComponent,
-    TemporizadorMemotestComponent
+    TemporizadorMemotestComponent,
+    AnagramaMasListadoComponent,
+    PptMasListadoComponent,
+    MemotestMasListadoComponent,
+    TatetiMasListadoComponent
   ],
   imports: [
     BrowserModule,
