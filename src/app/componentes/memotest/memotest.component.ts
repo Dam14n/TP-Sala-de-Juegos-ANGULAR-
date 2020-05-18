@@ -13,7 +13,7 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./memotest.component.css']
 })
 export class MemotestComponent implements OnInit {
-  @Output() enviarJuego: EventEmitter<any> = new EventEmitter<any>();
+  @Output() guardarPartida: EventEmitter<any> = new EventEmitter<any>();
   partida: PartidaMemotest;
   elegirDificultad = true;
   mostrarTimer = false;
@@ -89,6 +89,7 @@ export class MemotestComponent implements OnInit {
       .afterDismissed()
       .subscribe(value => {
         mensajeGanador.unsubscribe();
+        this.guardarPartida.emit(this.partida)
         this.reiniciarPartida();
       });
   }

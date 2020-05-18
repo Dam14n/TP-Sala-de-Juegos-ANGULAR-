@@ -1,5 +1,7 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { PartidaAgilidad } from '../../clases/Partida-agilidad';
+import { AuthService } from '../../servicios/auth-service.service';
+import { PartidaService } from '../../servicios/partida.service';
 
 @Component({
   selector: 'app-agilidad-aritmetica',
@@ -7,7 +9,6 @@ import { PartidaAgilidad } from '../../clases/Partida-agilidad';
   styleUrls: ['./agilidad-aritmetica.component.css']
 })
 export class AgilidadAritmeticaComponent implements OnInit {
-  @Output() enviarJuego: EventEmitter<any> = new EventEmitter<any>();
   partida: PartidaAgilidad;
   ocultarVerificar: boolean;
   tiempo: number;
@@ -18,15 +19,15 @@ export class AgilidadAritmeticaComponent implements OnInit {
     this.partida.iniciarPartida();
   }
 
-  constructor() {
+  constructor(private usuarioService: AuthService, private partidaService: PartidaService) {
     this.ocultarVerificar = true;
     this.tiempo = this.DEFAULT_TIME;
-    this.partida = new PartidaAgilidad();
+    this.partida = new PartidaAgilidad(undefined, undefined, this.usuarioService.obtenerUsuarioActual().usuario);
     console.info('Inicio agilidad');
   }
 
   iniciarPartida() {
-    this.partida = new PartidaAgilidad();
+    this.partida = new PartidaAgilidad(undefined, undefined, this.usuarioService.obtenerUsuarioActual().usuario);
     this.partida.iniciarPartida();
     console.log('Respuesta cuenta: ' + this.partida.operador.calcular(this.partida.primerNumero, this.partida.segundoNumero));
     this.ocultarVerificar = false;
@@ -46,10 +47,10 @@ export class AgilidadAritmeticaComponent implements OnInit {
   }
 
   private finalizarPartida() {
+    this.partidaService.guardarPartida(this.partida);
     clearInterval(this.repetidor);
     this.ocultarVerificar = true;
     this.tiempo = this.DEFAULT_TIME;
-    this.enviarJuego.emit(this.partida);
     this.partida.numeroIngresado = 0;
   }
 }

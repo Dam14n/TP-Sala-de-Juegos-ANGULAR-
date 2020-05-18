@@ -16,7 +16,8 @@ export class PartidaMemotest extends Partida {
     }
 
     public verificar(): boolean {
-        return this.IN_GAME_CARDS.every(carta => carta.estaSeleccionada() && carta.estaBloqueada());
+        this.gano = this.IN_GAME_CARDS.every(carta => carta.estaSeleccionada() && carta.estaBloqueada());
+        return this.gano;
     }
 
     public iniciarPartida(dificultad: Dificultad) {

@@ -1,4 +1,6 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../../servicios/auth-service.service';
+import { PartidaService } from '../../servicios/partida.service';
 import { PartidaAnagrama } from './../../clases/Partida-anagrama';
 
 @Component({
@@ -7,7 +9,6 @@ import { PartidaAnagrama } from './../../clases/Partida-anagrama';
   styleUrls: ['./anagrama.component.css']
 })
 export class AnagramaComponent implements OnInit {
-  @Output() enviarJuego: EventEmitter<any> = new EventEmitter<any>();
   partida: PartidaAnagrama;
   ocultarVerificar: boolean;
   tiempo: number;
@@ -18,10 +19,10 @@ export class AnagramaComponent implements OnInit {
     this.partida.iniciarPartida();
   }
 
-  constructor() {
+  constructor(private usuarioService: AuthService, private partidaService: PartidaService) {
     this.ocultarVerificar = true;
     this.tiempo = this.DEFAULT_TIME;
-    this.partida = new PartidaAnagrama();
+    this.partida = new PartidaAnagrama(undefined, undefined, this.usuarioService.obtenerUsuarioActual().usuario);
     console.info('Inicio agilidad');
   }
 
@@ -49,7 +50,7 @@ export class AnagramaComponent implements OnInit {
     clearInterval(this.repetidor);
     this.ocultarVerificar = true;
     this.tiempo = this.DEFAULT_TIME;
-    this.enviarJuego.emit(this.partida);
+    this.partidaService.guardarPartida(this.partida);
     this.partida.palabraIngresada = '';
   }
 

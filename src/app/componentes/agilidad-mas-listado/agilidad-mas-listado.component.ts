@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Partida } from '../../clases/Partida';
+import { PartidaAgilidad } from '../../clases/Partida-agilidad';
+import { PartidaService } from '../../servicios/partida.service';
 @Component({
   selector: 'app-agilidad-mas-listado',
   templateUrl: './agilidad-mas-listado.component.html',
@@ -7,13 +9,12 @@ import { Partida } from '../../clases/Partida';
 })
 export class AgilidadMasListadoComponent implements OnInit {
   public listadoParaCompartir: Array<Partida>;
-  constructor() { this.listadoParaCompartir = new Array<Partida>(); }
+
+  constructor(private partidaService: PartidaService) {
+    this.partidaService.obtenerPartidasParaJuego(new PartidaAgilidad().nombre).subscribe(partidas => this.listadoParaCompartir = partidas);
+  }
 
   ngOnInit() {
   }
 
-  tomarJuegoTerminado(partida: Partida) {
-    this.listadoParaCompartir.push(partida);
-    console.info('en app', this.listadoParaCompartir);
-  }
 }

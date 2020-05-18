@@ -1,6 +1,6 @@
 import { TestBed, inject } from '@angular/core/testing';
 
-import { PartidaService } from './partida-service.service';
+import { PartidaService } from './partida.service';
 
 describe('PartidaService', () => {
   beforeEach(() => {

@@ -1,6 +1,8 @@
 
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { PartidaAdivina } from '../../clases/Partida-adivina';
+import { PartidaService } from '../../servicios/partida.service';
+import { AuthService } from '../../servicios/auth-service.service';
 
 @Component({
   selector: 'app-adivina-el-numero',
@@ -8,20 +10,18 @@ import { PartidaAdivina } from '../../clases/Partida-adivina';
   styleUrls: ['./adivina-el-numero.component.css']
 })
 export class AdivinaElNumeroComponent implements OnInit {
-  @Output() enviarJuego: EventEmitter<any> = new EventEmitter<any>();
-
   partida: PartidaAdivina;
   Mensajes: string;
   contador: number;
   ocultarVerificar: boolean;
 
-  constructor() {
-    this.partida = new PartidaAdivina();
+  constructor(private partidaService: PartidaService, private usuarioService: AuthService) {
+    this.partida = new PartidaAdivina(undefined, undefined, this.usuarioService.obtenerUsuarioActual().usuario);
     console.info('numero Secreto:', this.partida.numeroSecreto);
     this.ocultarVerificar = false;
   }
   generarnumero() {
-    this.partida = new PartidaAdivina();
+    this.partida = new PartidaAdivina(undefined, undefined, this.usuarioService.obtenerUsuarioActual().usuario);
     this.partida.generarnumero();
     this.contador = 0;
   }
@@ -31,7 +31,7 @@ export class AdivinaElNumeroComponent implements OnInit {
     this.ocultarVerificar = true;
     console.info('numero Secreto:', this.partida.gano);
     if (this.partida.verificar()) {
-      this.enviarJuego.emit(this.partida);
+      this.partidaService.guardarPartida(this.partida);
       this.mostarMensaje('Sos un Genio!!!', true);
       this.partida.numeroSecreto = 0;
     } else {

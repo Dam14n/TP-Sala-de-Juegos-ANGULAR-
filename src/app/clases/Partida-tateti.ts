@@ -12,7 +12,8 @@ export class PartidaTateti extends Partida {
     }
 
     public verificar(): boolean {
-        return this.LINEAS.some(linea => linea.gano());
+        this.gano = this.LINEAS.some(linea => linea.gano());
+        return this.gano;
     }
 
     iniciarPartida() {

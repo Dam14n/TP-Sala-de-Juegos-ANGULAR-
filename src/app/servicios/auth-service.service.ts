@@ -14,7 +14,7 @@ export class AuthService {
     this.usuariosCollectionRef = this.firestore.collection<Usuario>('usuarios');
     this.usuarios = this.usuariosCollectionRef.snapshotChanges().map(actions => {
       return actions.map(action => {
-        const data = action.payload.doc.data() as Usuario;
+        const data = action.payload.doc.data();
         const id = action.payload.doc.id;
         return { id, ...data };
       });
@@ -42,9 +42,14 @@ export class AuthService {
     localStorage.removeItem('usuario');
   }
 
-  registrarUsuario(usuario: string, clave: string) {
+  public registrarUsuario(usuario: string, clave: string) {
     const nuevoUsuario = new Usuario(usuario, clave);
     this.usuariosCollectionRef.add({ ...nuevoUsuario });
+  }
+
+  // TODO mover a usuario service (refactorizar codigo de este servicio)
+  public obtenerUsuarioActual(): Usuario {
+    return JSON.parse(localStorage.getItem('usuario'));
   }
 
 }

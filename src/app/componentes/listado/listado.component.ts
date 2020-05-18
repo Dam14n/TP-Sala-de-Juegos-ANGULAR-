@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { PartidaService } from '../../servicios/partida-service.service';
+import { PartidaService } from '../../servicios/partida.service';
 
 @Component({
   selector: 'app-listado',

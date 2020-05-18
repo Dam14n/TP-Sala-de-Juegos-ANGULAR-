@@ -12,9 +12,8 @@ import { Tijera } from './../../clases/Tijera';
   styleUrls: ['./ppt.component.css']
 })
 export class PptComponent implements OnInit {
-  @Output() enviarJuego: EventEmitter<any> = new EventEmitter<any>();
+  @Output() guardarPartida: EventEmitter<any> = new EventEmitter<any>();
   partida: PartidaPiedraPapelTijera;
-  private readonly DEFAULT_TIME = 5;
   manos: Array<Mano> = [new Piedra(), new Papel(), new Tijera()];
 
   ngOnInit() {
@@ -40,7 +39,7 @@ export class PptComponent implements OnInit {
   }
 
   private finalizarPartida() {
-    this.enviarJuego.emit(this.partida);
+    this.guardarPartida.emit(this.partida);
     this.partida.manoElegida = null;
   }
 

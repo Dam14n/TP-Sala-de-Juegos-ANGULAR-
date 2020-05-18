@@ -29,7 +29,6 @@ import { ErrorComponent } from './componentes/error/error.component';
 import { InputJugadoresComponent } from './componentes/input-jugadores/input-jugadores.component';
 import { JuegosComponent } from './componentes/juegos/juegos.component';
 import { JugadoresListadoComponent } from './componentes/jugadores-listado/jugadores-listado.component';
-import { ListadoDePaisesComponent } from './componentes/listado-de-paises/listado-de-paises.component';
 import { ListadoDeResultadosComponent } from './componentes/listado-de-resultados/listado-de-resultados.component';
 import { ListadoComponent } from './componentes/listado/listado.component';
 import { ListadosComponent } from './componentes/listados/listados.component';
@@ -47,11 +46,9 @@ import { TatetiComponent } from './componentes/tateti/tateti.component';
 import { TemporizadorMemotestComponent } from './componentes/temporizador-memotest/temporizador-memotest.component';
 import { SexoPipe } from './pipes/sexo.pipe';
 import { RuteandoModule } from './ruteando/ruteando.module';
-import { ArchivosJugadoresService } from './servicios/archivos-jugadores.service';
 import { JugadoresService } from './servicios/jugadores.service';
 import { MiHttpService } from './servicios/mi-http/mi-http.service';
-import { PaisesService } from './servicios/paises.service';
-import { PartidaService } from './servicios/partida-service.service';
+import { PartidaService } from './servicios/partida.service';
 
 
 /**
@@ -102,7 +99,6 @@ export class FirebaseModule { }
     CabeceraComponent,
     QuienSoyComponent,
     AnagramaComponent,
-    ListadoDePaisesComponent,
     MapaDeGoogleComponent,
     JugadoresListadoComponent,
     InputJugadoresComponent,
@@ -130,7 +126,7 @@ export class FirebaseModule { }
     MaterialModule,
     FirebaseModule
   ],
-  providers: [PartidaService, MiHttpService, PaisesService, ArchivosJugadoresService, JugadoresService],
+  providers: [PartidaService, MiHttpService, JugadoresService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

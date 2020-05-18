@@ -9,7 +9,6 @@ import { AgilidadMasListadoComponent } from '../componentes/agilidad-mas-listado
 import { ErrorComponent } from '../componentes/error/error.component';
 import { JuegosComponent } from '../componentes/juegos/juegos.component';
 import { JugadoresListadoComponent } from '../componentes/jugadores-listado/jugadores-listado.component';
-import { ListadoDePaisesComponent } from '../componentes/listado-de-paises/listado-de-paises.component';
 import { ListadoComponent } from '../componentes/listado/listado.component';
 import { LoginComponent } from '../componentes/login/login.component';
 import { MapaDeGoogleComponent } from '../componentes/mapa-de-google/mapa-de-google.component';
@@ -31,7 +30,6 @@ const MiRuteo = [
   { path: 'Registro', component: RegistroComponent },
   { path: 'Principal', component: PrincipalComponent, pathMatch: 'full', canActivate: [AuthGuardService] },
   { path: 'Listado', component: ListadoComponent, canActivate: [AuthGuardService] },
-  { path: 'Paises', component: ListadoDePaisesComponent, canActivate: [AuthGuardService] },
   {
     path: 'Juegos',
     component: JuegosComponent,
